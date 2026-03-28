@@ -1,10 +1,18 @@
 'use client';
 
-import React, { DependencyList, createContext, useContext, ReactNode, useMemo, useState, useEffect } from 'react';
+import React, {
+  DependencyList,
+  createContext,
+  useContext,
+  ReactNode,
+  useMemo,
+  useState,
+  useEffect,
+} from 'react';
 import { FirebaseApp } from 'firebase/app';
 import { Firestore, doc, getDoc } from 'firebase/firestore';
 import { Auth, User, onAuthStateChanged } from 'firebase/auth';
-import { FirebaseErrorListener } from '@/components/FirebaseErrorListener'
+import { FirebaseErrorListener } from '@/components/FirebaseErrorListener';
 
 interface FirebaseProviderProps {
   children: ReactNode;
@@ -50,7 +58,9 @@ export interface UserHookResult {
   userError: Error | null;
 }
 
-export const FirebaseContext = createContext<FirebaseContextState | undefined>(undefined);
+export const FirebaseContext = createContext<FirebaseContextState | undefined>(
+  undefined
+);
 
 export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({
   children,
@@ -67,7 +77,12 @@ export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({
 
   useEffect(() => {
     if (!auth) {
-      setUserAuthState({ user: null, role: null, isUserLoading: false, userError: new Error("Auth service not provided.") });
+      setUserAuthState({
+        user: null,
+        role: null,
+        isUserLoading: false,
+        userError: new Error('Auth service not provided.'),
+      });
       return;
     }
 
@@ -76,19 +91,41 @@ export const FirebaseProvider: React.FC<FirebaseProviderProps> = ({
       async (firebaseUser) => {
         if (firebaseUser) {
           try {
-            const roleDoc = await getDoc(doc(firestore, 'user_roles', firebaseUser.uid));
+            const roleDoc = await getDoc(
+              doc(firestore, 'user_roles', firebaseUser.uid)
+            );
             const role = roleDoc.exists() ? roleDoc.data().role : 'customer';
-            setUserAuthState({ user: firebaseUser, role, isUserLoading: false, userError: null });
+            setUserAuthState({
+              user: firebaseUser,
+              role,
+              isUserLoading: false,
+              userError: null,
+            });
           } catch (err) {
-            console.error("Error fetching user role:", err);
-            setUserAuthState({ user: firebaseUser, role: 'customer', isUserLoading: false, userError: null });
+            console.error('Error fetching user role:', err);
+            setUserAuthState({
+              user: firebaseUser,
+              role: 'customer',
+              isUserLoading: false,
+              userError: null,
+            });
           }
         } else {
-          setUserAuthState({ user: null, role: null, isUserLoading: false, userError: null });
+          setUserAuthState({
+            user: null,
+            role: null,
+            isUserLoading: false,
+            userError: null,
+          });
         }
       },
       (error) => {
-        setUserAuthState({ user: null, role: null, isUserLoading: false, userError: error });
+        setUserAuthState({
+          user: null,
+          role: null,
+          isUserLoading: false,
+          userError: error,
+        });
       }
     );
     return () => unsubscribe();
@@ -121,8 +158,15 @@ export const useFirebase = (): FirebaseServicesAndUser => {
   if (context === undefined) {
     throw new Error('useFirebase must be used within a FirebaseProvider.');
   }
-  if (!context.areServicesAvailable || !context.firebaseApp || !context.firestore || !context.auth) {
-    throw new Error('Firebase core services not available. Check FirebaseProvider props.');
+  if (
+    !context.areServicesAvailable ||
+    !context.firebaseApp ||
+    !context.firestore ||
+    !context.auth
+  ) {
+    throw new Error(
+      'Firebase core services not available. Check FirebaseProvider props.'
+    );
   }
   return {
     firebaseApp: context.firebaseApp,
@@ -150,9 +194,12 @@ export const useFirebaseApp = (): FirebaseApp => {
   return firebaseApp;
 };
 
-export function useMemoFirebase<T>(factory: () => T, deps: DependencyList): T & {__memo?: boolean} {
+export function useMemoFirebase<T>(
+  factory: () => T,
+  deps: DependencyList
+): T & { __memo?: boolean } {
   const memoized = useMemo(factory, deps);
-  if(typeof memoized !== 'object' || memoized === null) return memoized as any;
+  if (typeof memoized !== 'object' || memoized === null) return memoized as any;
   (memoized as any).__memo = true;
   return memoized as any;
 }

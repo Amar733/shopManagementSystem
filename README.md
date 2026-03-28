@@ -15,17 +15,21 @@ A modern shop management dashboard built with Next.js, TypeScript, and Tailwind 
 ## Getting Started
 
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Set up environment variables:
+
    ```bash
    cp .env.local.example .env.local
    ```
+
    Fill in your Firebase configuration values.
 
 3. Run the development server:
+
    ```bash
    npm run dev
    ```
@@ -66,6 +70,7 @@ A modern shop management dashboard built with Next.js, TypeScript, and Tailwind 
 ## Code Quality
 
 This project includes:
+
 - ESLint configuration for code quality
 - Prettier for consistent formatting
 - TypeScript strict mode

@@ -1,6 +1,5 @@
-
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation';
 
 export default function OrdersRedirect() {
-  redirect("/dashboard/orders")
+  redirect('/dashboard/orders');
 }

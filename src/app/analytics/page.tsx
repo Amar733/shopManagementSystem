@@ -1,6 +1,5 @@
-
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation';
 
 export default function AnalyticsRedirect() {
-  redirect("/dashboard/analytics")
+  redirect('/dashboard/analytics');
 }

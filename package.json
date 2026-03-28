@@ -44,6 +44,7 @@
     "postcss": "^8",
     "react": "^18",
     "react-day-picker": "^9.14.0",
+    "react-hook-form": "^7.51.0",
     "react-dom": "^18",
     "recharts": "^2.8.0",
     "tailwind-merge": "^1.14.0",

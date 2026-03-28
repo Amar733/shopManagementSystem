@@ -5,17 +5,18 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const search = searchParams.get('search');
-    
+
     let filteredCustomers = customers;
-    
+
     if (search) {
-      filteredCustomers = filteredCustomers.filter(c =>
-        c.name.toLowerCase().includes(search.toLowerCase()) ||
-        c.email.toLowerCase().includes(search.toLowerCase()) ||
-        c.phone.includes(search)
+      filteredCustomers = filteredCustomers.filter(
+        (c) =>
+          c.name.toLowerCase().includes(search.toLowerCase()) ||
+          c.email.toLowerCase().includes(search.toLowerCase()) ||
+          c.phone.includes(search)
       );
     }
-    
+
     return NextResponse.json(filteredCustomers);
   } catch (error) {
     return NextResponse.json(

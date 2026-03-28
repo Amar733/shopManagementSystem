@@ -38,13 +38,13 @@ const nextConfig = {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env']
-        }
-      }
+          presets: ['@babel/preset-env'],
+        },
+      },
     });
 
     return config;
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

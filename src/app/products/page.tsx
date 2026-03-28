@@ -1,6 +1,5 @@
-
-import { redirect } from "next/navigation"
+import { redirect } from 'next/navigation';
 
 export default function ProductsRedirect() {
-  redirect("/dashboard/products")
+  redirect('/dashboard/products');
 }

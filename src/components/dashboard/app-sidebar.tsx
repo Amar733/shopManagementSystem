@@ -1,19 +1,19 @@
-"use client"
+'use client';
 
-import * as React from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { 
-  LayoutDashboard, 
-  UtensilsCrossed, 
-  Users, 
-  BarChart3, 
-  Settings, 
+import * as React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  LayoutDashboard,
+  UtensilsCrossed,
+  Users,
+  BarChart3,
+  Settings,
   ChefHat,
   Ticket,
   PartyPopper,
-  Flame
-} from "lucide-react"
+  Flame,
+} from 'lucide-react';
 
 import {
   Sidebar,
@@ -26,101 +26,118 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarGroupContent,
-} from "@/components/ui/sidebar"
-import { Badge } from "@/components/ui/badge"
-import { useUser } from "@/firebase/provider"
+} from '@/components/ui/sidebar';
+import { Badge } from '@/components/ui/badge';
+import { useUser } from '@/firebase/provider';
 
 const navItems = [
   {
-    title: "Executive Overview",
-    url: "/dashboard",
+    title: 'Executive Overview',
+    url: '/dashboard',
     icon: LayoutDashboard,
-    roles: ["admin", "staff", "customer"]
+    roles: ['admin', 'staff', 'customer'],
   },
   {
-    title: "Culinary Catalog",
-    url: "/dashboard/products",
+    title: 'Culinary Catalog',
+    url: '/dashboard/products',
     icon: UtensilsCrossed,
-    roles: ["admin", "staff", "customer"]
+    roles: ['admin', 'staff', 'customer'],
   },
   {
-    title: "Kitchen Feed",
-    url: "/dashboard/orders",
+    title: 'Kitchen Feed',
+    url: '/dashboard/orders',
     icon: Flame,
-    badge: "8",
-    roles: ["admin", "staff"]
+    badge: '8',
+    roles: ['admin', 'staff'],
   },
   {
-    title: "Guest Directory",
-    url: "/dashboard/customers",
+    title: 'Guest Directory',
+    url: '/dashboard/customers',
     icon: Users,
-    roles: ["admin", "staff"]
+    roles: ['admin', 'staff'],
   },
   {
-    title: "Festive Hub",
-    url: "/dashboard/offers",
+    title: 'Festive Hub',
+    url: '/dashboard/offers',
     icon: PartyPopper,
-    roles: ["admin", "staff", "customer"]
+    roles: ['admin', 'staff', 'customer'],
   },
   {
-    title: "Promo Codes",
-    url: "/dashboard/coupons",
+    title: 'Promo Codes',
+    url: '/dashboard/coupons',
     icon: Ticket,
-    roles: ["admin"]
+    roles: ['admin'],
   },
   {
-    title: "Deep Analytics",
-    url: "/dashboard/analytics",
+    title: 'Deep Analytics',
+    url: '/dashboard/analytics',
     icon: BarChart3,
-    roles: ["admin"]
+    roles: ['admin'],
   },
-]
+];
 
 export function AppSidebar() {
-  const pathname = usePathname()
-  let role = null
-  
+  const pathname = usePathname();
+  let role = null;
+
   try {
-    const userHook = useUser()
-    role = userHook.role
+    const userHook = useUser();
+    role = userHook.role;
   } catch (error) {
     // Firebase not configured, role will remain null
-    console.warn('Firebase not configured, showing all menu items')
+    console.warn('Firebase not configured, showing all menu items');
   }
 
   // For development: if Firebase is not configured, show all items
-  const filteredItems = navItems.filter(item => 
-    !item.roles || (role && item.roles.includes(role)) || !role // Show all if no role (development fallback)
-  )
+  const filteredItems = navItems.filter(
+    (item) => !item.roles || (role && item.roles.includes(role)) || !role // Show all if no role (development fallback)
+  );
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-border/40 bg-card/80 backdrop-blur-xl">
+    <Sidebar
+      collapsible="icon"
+      className="border-r border-border/40 bg-card/80 backdrop-blur-xl"
+    >
       <SidebarHeader className="border-b h-16 flex items-center px-6">
-        <Link href="/dashboard" className="flex items-center gap-3 font-black text-2xl text-primary tracking-tighter">
+        <Link
+          href="/dashboard"
+          className="flex items-center gap-3 font-black text-2xl text-primary tracking-tighter"
+        >
           <div className="bg-primary p-1.5 rounded-xl shadow-lg shadow-primary/20">
             <ChefHat className="h-6 w-6 text-white" />
           </div>
-          <span className="group-data-[collapsible=icon]:hidden">Gusto<span className="text-foreground/80">Manager</span></span>
+          <span className="group-data-[collapsible=icon]:hidden">
+            Gusto<span className="text-foreground/80">Manager</span>
+          </span>
         </Link>
       </SidebarHeader>
       <SidebarContent className="px-3 pt-4">
         <SidebarGroup>
           <SidebarGroupLabel className="px-3 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/50 mb-2">
-            {role === 'customer' ? 'Guest Lounge' : role === 'admin' || role === 'staff' ? 'Back of House' : 'Navigation'}
+            {role === 'customer'
+              ? 'Guest Lounge'
+              : role === 'admin' || role === 'staff'
+                ? 'Back of House'
+                : 'Navigation'}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {filteredItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
-                    asChild 
+                  <SidebarMenuButton
+                    asChild
                     isActive={pathname === item.url}
                     tooltip={item.title}
                     className="h-11 px-3 rounded-xl transition-all data-[active=true]:bg-primary/10 data-[active=true]:text-primary group/item hover:bg-accent hover:text-accent-foreground cursor-pointer"
                   >
-                    <Link href={item.url} className="flex items-center w-full no-underline text-inherit hover:text-inherit">
+                    <Link
+                      href={item.url}
+                      className="flex items-center w-full no-underline text-inherit hover:text-inherit"
+                    >
                       <item.icon className="transition-transform group-hover/item:scale-110" />
-                      <span className="flex-1 font-bold text-sm tracking-tight">{item.title}</span>
+                      <span className="flex-1 font-bold text-sm tracking-tight">
+                        {item.title}
+                      </span>
                       {item.badge && (
                         <Badge className="ml-auto bg-primary text-[10px] h-5 px-1.5 border-none group-data-[collapsible=icon]:hidden">
                           {item.badge}
@@ -138,15 +155,20 @@ export function AppSidebar() {
         <SidebarMenu>
           {(!role || role === 'admin') && (
             <SidebarMenuItem>
-              <SidebarMenuButton 
-                asChild 
-                isActive={pathname === "/dashboard/settings"}
+              <SidebarMenuButton
+                asChild
+                isActive={pathname === '/dashboard/settings'}
                 tooltip="Configurations"
                 className="h-11 px-3 rounded-xl transition-all data-[active=true]:bg-primary/10 data-[active=true]:text-primary hover:bg-accent hover:text-accent-foreground cursor-pointer"
               >
-                <Link href="/dashboard/settings" className="no-underline text-inherit hover:text-inherit">
+                <Link
+                  href="/dashboard/settings"
+                  className="no-underline text-inherit hover:text-inherit"
+                >
                   <Settings />
-                  <span className="font-bold text-sm tracking-tight">Configurations</span>
+                  <span className="font-bold text-sm tracking-tight">
+                    Configurations
+                  </span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -154,5 +176,5 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

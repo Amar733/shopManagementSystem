@@ -1,13 +1,13 @@
-"use client"
+'use client';
 
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/dashboard/app-sidebar"
-import { TopNav } from "@/components/dashboard/top-nav"
+import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/dashboard/app-sidebar';
+import { TopNav } from '@/components/dashboard/top-nav';
 
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <SidebarProvider>
@@ -21,5 +21,5 @@ export default function DashboardLayout({
         </SidebarInset>
       </div>
     </SidebarProvider>
-  )
+  );
 }
