@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 30% 98%;
+    --foreground: 24 20% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 24 20% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 24 20% 10%;
+    --primary: 28 90% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 20% 94%;
+    --secondary-foreground: 28 90% 40%;
+    --muted: 35 15% 94%;
+    --muted-foreground: 24 10% 45%;
+    --accent: 28 90% 96%;
+    --accent-foreground: 28 90% 35%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 24 15% 90%;
+    --input: 24 15% 90%;
+    --ring: 28 90% 45%;
+    --radius: 1.25rem;
+    --chart-1: 28 90% 45%;
+    --chart-2: 45 80% 55%;
+    --chart-3: 15 75% 40%;
+    --chart-4: 35 90% 70%;
+    --chart-5: 200 80% 50%;
+  }
+
+  .dark {
+    --background: 24 20% 6%;
+    --foreground: 35 10% 98%;
+    --card: 24 20% 8%;
+    --card-foreground: 35 10% 98%;
+    --popover: 24 20% 8%;
+    --popover-foreground: 35 10% 98%;
+    --primary: 28 90% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 24 20% 12%;
+    --secondary-foreground: 28 90% 60%;
+    --muted: 24 15% 12%;
+    --muted-foreground: 35 10% 65%;
+    --accent: 28 90% 15%;
+    --accent-foreground: 28 90% 80%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 24 15% 18%;
+    --input: 24 15% 18%;
+    --ring: 28 90% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased selection:bg-primary/20;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.glass-card {
+  @apply bg-white/70 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-white/10;
+}
+
+.nav-item-active {
+  @apply bg-primary/10 text-primary font-bold shadow-sm;
+}
