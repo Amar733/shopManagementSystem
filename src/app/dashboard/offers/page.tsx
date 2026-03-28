@@ -37,7 +37,7 @@ const activeOffers = [
   {
     id: "FEST-002",
     title: "Weekend Holi Blast",
-    description: "Special Thandai and vibrant snack combo for groups of 4+.",
+    description: "Special Thandai and vibrant snacks combo for groups of 4+.",
     discount: "BUY 1 GET 1",
     validUntil: "Mar 28, 2024",
     redemptions: 890,
