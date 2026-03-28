@@ -26,7 +26,7 @@ const activeOffers = [
   {
     id: "FEST-001",
     title: "Diwali Grand Feast",
-    description: "Family platter with complimentary dessert and traditional sweets.",
+    description: "Family platter with complimentary desserts and traditional sweets.",
     discount: "25% OFF",
     validUntil: "Nov 15, 2024",
     redemptions: 450,
