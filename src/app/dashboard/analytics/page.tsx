@@ -213,7 +213,7 @@ export default function AnalyticsPage() {
         >
           <CardHeader>
             <CardTitle>Category Mix</CardTitle>
-            <CardDescription>Contribution to total billables.</CardDescription>
+            <CardDescription>Contributions to total billables.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="h-[250px]">
